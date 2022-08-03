@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.this-is-not-url.com/GetCreditStoryRq"
+    targetNamespace="http://www.this-is-not-url.com/GetCreditStoryRq" elementFormDefault="qualified">
+    <element name="GetCreditStoryRq">
+        <annotation>
+            <documentation>Запрос для получения кредитной истории клиента</documentation>
+        </annotation>
+        <complexType>
+            <sequence>
+                <element name="Client" type="tns:Client_Info"/>
+                <element name="ClientDocument" type="tns:Document_Info"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Client_Info">
+        <sequence>
+            <element name="FullName">
+                <annotation>
+                    <documentation>ФИО клиента</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DateOfBirth" type="date">
+                <annotation>
+                    <documentation>Дата рождения клиента</documentation>
+                </annotation>
+            </element>
+            <element name="ResidentOfTheRussianFederation" type="boolean">
+                <annotation>
+                    <documentation>Является ли клиент Резидентом РФ</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Document_Info">
+        <sequence>
+            <element name="Type">
+                <annotation>
+                    <documentation>Тип документа (идентификатор документа из справочника "Документы клиента")</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="SerialNumber">
+                <annotation>
+                    <documentation>Серия и номер документа</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DateOfIssue" type="date">
+                <annotation>
+                    <documentation>Дата выдачи</documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+</schema>

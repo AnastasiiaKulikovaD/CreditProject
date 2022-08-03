@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+    xmlns:tns="http://www.this-is-not-url.com/GetCreditStoryRs"
+    targetNamespace="http://www.this-is-not-url.com/GetCreditStoryRs" elementFormDefault="qualified">
+    <element name="GetCreditStoryRs">
+        <annotation>
+            <documentation>Ответ с кредитной историей клиента</documentation>
+        </annotation>
+        <complexType>
+            <sequence>
+                <element name="Credit" type="tns:Credit_Info" minOccurs="0" maxOccurs="unbounded"/>
+                <element name="StatusInfo" type="tns:Status_Info"/>
+            </sequence>
+        </complexType>
+    </element>
+    <complexType name="Credit_Info">
+        <sequence>
+            <element name="CreditID">
+                <annotation>
+                    <documentation>Уникальный идентификатор кредита</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="TypeOfCredit">
+                <annotation>
+                    <documentation>Тип кредита (идентификатор кредита из справочника "Типы кредитов")</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Term">
+                <annotation>
+                    <documentation>Срок</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Amount">
+                <annotation>
+                    <documentation>Сумма</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <totalDigits value="10"/> 
+                        <fractionDigits value="2"/> 
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="InterestRate">
+                <annotation>
+                    <documentation>Процентная ставка</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <totalDigits value="2"/> 
+                        <fractionDigits value="2"/> 
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="DaysOderdue" minOccurs="0" maxOccurs="1">
+                <annotation>
+                    <documentation>Количество дней просрочки</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="RepaymentSchedule" type="tns:Repayment_Info" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Repayment_Info">
+        <sequence>
+            <element name="ScheduleID">
+                <annotation>
+                    <documentation>Уникальный идентификатор графика погашения долга</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="PaymentDate" type="date">
+                <annotation>
+                    <documentation>Дата совершения оплаты</documentation>
+                </annotation>
+            </element>
+            <element name="PaymentAmount">
+                <annotation>
+                    <documentation>Сумма оплаты</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <totalDigits value="10"/> 
+                        <fractionDigits value="2"/> 
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Currency">
+                <annotation>
+                    <documentation>Валюта</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20"/> 
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="Status_Info">
+        <sequence>
+            <element name="Status">
+                <annotation>
+                    <documentation>Статус ответа</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20"/> 
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ErrorCode" type="integer" minOccurs="0" maxOccurs="1">
+                <annotation>
+                    <documentation>Код ошибки</documentation>
+                </annotation>
+            </element>
+            <element name="ErrorDescription" minOccurs="0" maxOccurs="1">
+                <annotation>
+                    <documentation>Описание ошибки</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2000"/> 
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+</schema>
